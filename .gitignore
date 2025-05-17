@@ -1,0 +1,41 @@
+# Node.js / React
+node_modules/
+build/
+dist/
+.env
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+*.sqlite3
+*.db
+.env
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Sistema / IDEs
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+.idea/
+*.iml
+
+# Traefik, Dokku, Docker, etc (se aplicável)
+*.pid
+*.sock
+logs/
+tmp/
