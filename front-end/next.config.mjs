@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Habilita a exportação estática
+     // output: 'export', // Habilita a exportação estática
 
   typescript: {
     // Ignorar erros de compilação do TypeScript

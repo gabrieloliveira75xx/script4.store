@@ -14,16 +14,30 @@ RUN npm install
 COPY . .
 
 # Gerar o build para produção
-RUN npm run build  # Agora o build já gera os arquivos estáticos na pasta 'out/'
+RUN npm run build
 
-# Etapa de produção: usar Nginx para servir os arquivos estáticos gerados pelo Next.js
-FROM nginx:alpine
+# Etapa de produção: rodar a aplicação Next.js
+FROM node:18-alpine
 
-# Copiar os arquivos estáticos gerados pela etapa de build do Next.js para o diretório de arquivos estáticos do Nginx
-COPY --from=build /app/out /usr/share/nginx/html
+# Definir o diretório de trabalho
+WORKDIR /app
 
-# Expor a porta 80 (padrão para Nginx)
-EXPOSE 80
+# Copiar o package.json e o package-lock.json
+COPY package*.json ./
 
-# Comando para rodar o Nginx em segundo plano
-CMD ["nginx", "-g", "daemon off;"]
+# Instalar apenas as dependências de produção
+RUN npm install --production
+
+# Copiar os arquivos de build da etapa anterior
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/public ./public
+
+# Configurar variáveis de ambiente
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Expor a porta 3000
+EXPOSE 3000
+
+# Comando para iniciar a aplicação
+CMD ["npm", "start"]
