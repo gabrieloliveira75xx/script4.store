@@ -37,11 +37,9 @@ services:
     container_name: script4store-backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`script4.store`) && PathPrefix(`/api/bash`)"
+      - "traefik.http.routers.backend.rule=Host(`script4.store`) && PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=web"
-      - "traefik.http.services.backend.loadbalancer.server.port=8000"
-      - "traefik.http.middlewares.stripbash.stripprefix.prefixes=/api/bash"
-      - "traefik.http.routers.backend.middlewares=stripbash"
+      - "traefik.http.services.backend.loadbalancer.server.port=16000"
     restart: unless-stopped
     networks:
       - app-network

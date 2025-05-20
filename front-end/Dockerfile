@@ -13,8 +13,9 @@ RUN npm install
 # Copiar o restante dos arquivos do projeto
 COPY . .
 
-# Gerar o build para produção
-RUN npm run build
+# Limpar cache e gerar o build para produção
+RUN rm -rf .next && \
+    npm run build
 
 # Etapa de produção: rodar a aplicação Next.js
 FROM node:18-alpine
