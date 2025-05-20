@@ -10,6 +10,12 @@ type MessageType = {
   content: string
 }
 
+type CommandResponse = {
+  stdout: string
+  stderr: string
+  returncode: number
+}
+
 export default function TerminalChat() {
   const [messages, setMessages] = useState<MessageType[]>([
     { type: "bot", content: "Welcome to Linux Terminal v1.0" },
@@ -32,6 +38,24 @@ export default function TerminalChat() {
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
+
+  const formatCommandOutput = (response: CommandResponse): string => {
+    let output = ""
+    
+    if (response.stdout) {
+      output += response.stdout
+    }
+    
+    if (response.stderr) {
+      output += "\nError: " + response.stderr
+    }
+    
+    if (response.returncode !== 0) {
+      output += `\nCommand exited with code ${response.returncode}`
+    }
+    
+    return output.trim() || "Command executed successfully."
+  }
 
   const sendMessage = async () => {
     if (!inputMessage.trim()) return
@@ -59,7 +83,13 @@ export default function TerminalChat() {
       }
 
       const data = await response.json()
-      const botMessage: MessageType = { type: "bot", content: data.response || data.detail || "Command executed successfully." }
+      const commandResponse = data.response as CommandResponse
+      const formattedOutput = formatCommandOutput(commandResponse)
+      
+      const botMessage: MessageType = { 
+        type: "bot", 
+        content: formattedOutput
+      }
       setMessages([...newMessages, botMessage])
     } catch (error) {
       console.error("Error:", error)
