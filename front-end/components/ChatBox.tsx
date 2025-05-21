@@ -60,6 +60,15 @@ export default function TerminalChat() {
   const sendMessage = async () => {
     if (!inputMessage.trim()) return
 
+    const cmd = inputMessage.trim().toLowerCase()
+    
+    // Handle clear command locally
+    if (cmd === "clear") {
+      setMessages([])
+      setInputMessage("")
+      return
+    }
+
     setCommandHistory((prev) => [inputMessage, ...prev])
     setHistoryIndex(-1)
 

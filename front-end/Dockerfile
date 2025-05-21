@@ -35,10 +35,10 @@ COPY --from=build /app/public ./public
 
 # Configurar variáveis de ambiente
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=60000
 
 # Expor a porta 3000
-EXPOSE 3000
+EXPOSE 60000
 
 # Comando para iniciar a aplicação
 CMD ["npm", "start"]
