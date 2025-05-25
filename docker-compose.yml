@@ -1,23 +1,4 @@
 services:
-  traefik:
-    image: traefik:v3.4
-    container_name: traefik
-    command:
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.web.address=:80"
-      - "--api.dashboard=true"
-      - "--api.insecure=false"
-      - "--log.level=INFO"
-      - "--accesslog=true"
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
-    networks:
-      - app-network
-
   frontend:
     build: ./front-end
     container_name: script4store-frontend
@@ -25,25 +6,25 @@ services:
       - NODE_ENV=production
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`script4.store`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
-      - "traefik.http.services.frontend.loadbalancer.server.port=60000"
+      - "traefik.http.routers.script4store-frontend.rule=Host(`script4.store`)"
+      - "traefik.http.routers.script4store-frontend.entrypoints=web"
+      - "traefik.http.services.script4store-frontend.loadbalancer.server.port=60000"
     restart: unless-stopped
     networks:
-      - app-network
+      - traefik-net
 
   backend:
     build: ./back-end
     container_name: script4store-backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`script4.store`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.backend.entrypoints=web"
-      - "traefik.http.services.backend.loadbalancer.server.port=16000"
+      - "traefik.http.routers.script4store-backend.rule=Host(`script4.store`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.script4store-backend.entrypoints=web"
+      - "traefik.http.services.script4store-backend.loadbalancer.server.port=16000"
     restart: unless-stopped
     networks:
-      - app-network
+      - traefik-net
 
 networks:
-  app-network:
-    driver: bridge
+  traefik-net:
+    external: true

@@ -120,9 +120,9 @@ export default function Portfolio() {
   ]
 
   const projectsData = [
-    { title: "Meu site rápido", description: "Transformando empresas do analógico para o digital.", image: "/MSR.png" },
+    { title: "Nuuvik", description: "Transformando empresas do analógico para o digital.", image: "/nuuvik.svg" },
     { title: "Space Informática", description: "Soluções de Hardware B2B e B2C", image: "/space.png" },
-    { title: "Nexus RP", description: "Servidor de Roleplay", image: "/nexus.jpg" },
+    { title: "Nexus RP", description: "Servidor de Roleplay", image: "/nexus.svg" },
   ]
 
   const passionsData = [
@@ -133,12 +133,13 @@ export default function Portfolio() {
 
   const skillsData = {
     networking: [
-      "Configurações intermediárias em Mikrotik (Firewall, VLANs, VPN, etc.)",
-      "Experiência com Nginx e dispositivos wireless TP-Link/UBIQUITI",
+      "Configurações intermediárias em PFSense (Firewall, VLANs, VPN, etc.)",
+      "Experiência com Nginx/Traefik e dispositivos wireless TP-Link/UBIQUITI",
+      "Experiência com Nginx/Traefik e dispositivos wireless TP-Link/UBIQUITI",
     ],
     hardware: [
       "Reparo de PCB e diagnóstico de hardware",
-      "Virtualização e teste de estresse",
+      "Virtualização Proxmox e servidores",
     ],
     programming: [
       "Next.js, Tailwind CSS, TypeScript",
@@ -329,48 +330,7 @@ export default function Portfolio() {
           </div>
 
           {/* Comments Section */}
-          <div ref={commentsRef} className="min-h-screen flex flex-col justify-center bg-[#F0F0F0] dark:bg-[#2A2A2A] p-4 md:p-8 snap-start transition-colors duration-300">
-            <h3 className="text-2xl font-bold mb-6 text-center">Comentários</h3>
-            <div className="max-w-3xl mx-auto w-full">
-              {/* Existing comments list */}
-              <div className="mb-8">
-                {isLoading ? (
-                  <p>Carregando comentários...</p>
-                ) : (
-                  comments.map((comment) => (
-                    <div key={comment.id} className="bg-white dark:bg-[#3A3A3A] p-4 rounded-lg shadow-md mb-4">
-                      <p className="font-bold">{comment.name}</p>
-                      <p className="text-gray-600 dark:text-gray-300">{comment.text}</p>
-                      <p className="text-sm text-gray-500 mt-2">{new Date(comment.createdAt).toLocaleString()}</p>
-                    </div>
-                  ))
-                )}
-              </div>
 
-              {/* Form to add a new comment */}
-              <h4 className="text-xl font-bold mb-4">Deixe um Comentário</h4>
-              <input
-                type="text"
-                value={commentName}
-                onChange={(e) => setCommentName(e.target.value)}
-                placeholder="Seu nome"
-                className="w-full p-2 mb-4 border-2 border-black dark:border-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFA6F6] dark:focus:ring-[#FF00FF] bg-white dark:bg-[#3A3A3A] text-black dark:text-white transition-colors duration-300"
-              />
-              <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Escreva seu comentário aqui..."
-                className="w-full h-40 p-4 border-2 border-black dark:border-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFA6F6] dark:focus:ring-[#FF00FF] bg-white dark:bg-[#3A3A3A] text-black dark:text-white transition-colors duration-300"
-              />
-              <button 
-                onClick={handleCommentSubmit}
-                disabled={!commentName.trim() || !comment.trim()}
-                className="mt-4 bg-[#A6FAFF] dark:bg-[#FF00FF] hover:bg-[#79F7FF] dark:hover:bg-[#CC00CC] active:bg-[#00E1EF] dark:active:bg-[#990099] border-2 border-black dark:border-white rounded-md p-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Enviar Comentário
-              </button>
-            </div>
-          </div>
 
           {/* Footer */}
           <footer className="bg-[#1A1A1A] dark:bg-black text-white p-4 transition-colors duration-300">

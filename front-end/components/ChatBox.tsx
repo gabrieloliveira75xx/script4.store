@@ -196,14 +196,7 @@ export default function TerminalChat() {
             className="flex-1 py-1 px-2 bg-transparent border-none outline-none text-black dark:text-white font-mono text-sm"
           />
         </div>
-        <button
-          onClick={sendMessage}
-          disabled={isLoading}
-          className="ml-2 px-3 py-1 bg-[#A6FAFF] dark:bg-[#FF00FF] hover:bg-[#79F7FF] dark:hover:bg-[#CC00CC] active:bg-[#00E1EF] dark:active:bg-[#990099] text-black dark:text-white border-2 border-black dark:border-white rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.3)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-xs"
-        >
-          <Send className="w-3 h-3" />
-          <span>Execute</span>
-        </button>
+
       </div>
     </div>
   )
