@@ -25,6 +25,36 @@ services:
     networks:
       - traefik-net
 
+  router-api:
+    build: ./tvm/roteador/back-end
+    container_name: script4store-router-api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-api.rule=Host(`script4.store`) && PathPrefix(`/tvm-roteador/api`)"
+      - "traefik.http.routers.router-api.entrypoints=web"
+      - "traefik.http.services.router-api.loadbalancer.server.port=7000"
+    restart: unless-stopped
+    networks:
+      - traefik-net
+
+  router-frontend:
+    build: ./tvm/roteador/front-end
+    container_name: script4store-router-frontend
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-frontend.rule=Host(`script4.store`) && PathPrefix(`/tvm-roteador`)"
+      - "traefik.http.routers.router-frontend.entrypoints=web"
+      - "traefik.http.services.router-frontend.loadbalancer.server.port=7001"
+      - "traefik.http.middlewares.router-frontend-stripprefix.stripprefix.prefixes=/tvm-roteador"
+      - "traefik.http.middlewares.router-frontend-stripprefix.stripprefix.forceSlash=true"
+      - "traefik.http.routers.router-frontend.middlewares=router-frontend-stripprefix"
+      - "traefik.http.services.router-frontend.loadbalancer.passHostHeader=true"
+    restart: unless-stopped
+    networks:
+      - traefik-net
+
 networks:
   traefik-net:
     external: true

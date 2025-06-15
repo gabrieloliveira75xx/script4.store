@@ -122,7 +122,7 @@ export default function Portfolio() {
   const projectsData = [
     { title: "Nuuvik", description: "Transformando empresas do analógico para o digital.", image: "/nuuvik.svg" },
     { title: "Space Informática", description: "Soluções de Hardware B2B e B2C", image: "/space.png" },
-    { title: "Nexus RP", description: "Servidor de Roleplay", image: "/nexus.svg" },
+    { title: "Grupo GLK", description: "Desenvolvimento de uma home-page para o Grupo GLK", image: "/logo-glk.svg" },
   ]
 
   const passionsData = [
@@ -134,7 +134,6 @@ export default function Portfolio() {
   const skillsData = {
     networking: [
       "Configurações intermediárias em PFSense (Firewall, VLANs, VPN, etc.)",
-      "Experiência com Nginx/Traefik e dispositivos wireless TP-Link/UBIQUITI",
       "Experiência com Nginx/Traefik e dispositivos wireless TP-Link/UBIQUITI",
     ],
     hardware: [

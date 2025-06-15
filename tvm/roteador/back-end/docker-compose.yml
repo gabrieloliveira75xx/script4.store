@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  router-api:
+    build: .
+    container_name: script4store-router-api
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-api.rule=Host(`script4.store`) && PathPrefix(`/tvm-roteador/api`)"
+      - "traefik.http.routers.router-api.entrypoints=web"
+      - "traefik.http.services.router-api.loadbalancer.server.port=7000"
+    restart: unless-stopped
+
+networks:
+  app-network:
+    external: true 
